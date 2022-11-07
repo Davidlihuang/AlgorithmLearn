@@ -22,7 +22,6 @@ void backtrace(const vector<int>& numList, vector<int>& path)
     ///< 当前解path填满，结速
     if(path.size() == numList.size())
     {
-       cout << "find result" << endl;
        result.push_back(path);
        return;
     }
@@ -57,6 +56,18 @@ vector<vector<int>> fullArrangement(vector<int>& numList)
 
 }
 
+void printVec(const vector<int>& vec)
+{
+    cout << "[";
+        for(int j  = 0; j< vec.size(); j++)
+        {
+            cout << vec[j];
+            if(j != (vec.size()-1))
+                cout << ", ";
+        }
+        cout << "] " << endl;   
+}
+
 int main()
 {
     vector<int> nums{1,2,3};
@@ -65,12 +76,7 @@ int main()
     cout << "result = "<< endl;
     for(int i =0; i< res.size(); i++)
     {
-        cout << "[ ";
-        for(int j  = 0; j< res[i].size(); j++)
-        {
-            cout << res[i][j] << ", ";
-        }
-        cout << " ]" << endl;
+        printVec(res[i]);
     }
     return 0;
 }
