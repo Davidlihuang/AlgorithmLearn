@@ -8,9 +8,12 @@ using  std::endl;
 
 class  Point
 {
-    int x; //< 物理坐标
-    int y;
+    double x; //< 物理坐标
+    double y;
     
+    int row; ///< 图中的行列数
+    int col;
+
     bool isBlock; // 标记障碍物
     bool isVisit; // 访问标记
         
@@ -43,7 +46,7 @@ public:
         return this->fitness >= other.fitness;
     }
 
-    Point(int a = 0, int b =0):x(a),y(b)
+    Point(int a = 0, int b =0):row(a),col(b)
     {
         isBlock = false;
         isVisit = false;
@@ -51,23 +54,29 @@ public:
         hValue = 0;
         fitness = 0;
         parent = nullptr;
+        x = 0.0;
+        y = 0.0;
     }
 
-    bool isVisit() const { return isVisit;};
-    void setVisited()  {isVisit = true;} ;
-    void unSetVisite() {isVisit = false;};
+    bool   isVisit() const { return isVisit;};
+    void   setVisited()  {isVisit = true;} ;
+    void   unSetVisite() {isVisit = false;};
     
-    bool isObstacle() const { return isBlock;};
-    void setObstacle() {isBlock = true;};
-    void unsetObstacle() {isBlock = false;};
+    bool   isObstacle() const { return isBlock;};
+    void   setObstacle() {isBlock = true;};
+    void   unsetObstacle() {isBlock = false;};
 
     Point* getParent() const{return parent;};
     void   setParent(Point* p) { parent = p;};
 
-    void setFitness(double g, double h){ fitness = g+h;};
+    void   setFitness(double g, double h){ fitness = g+h;};
     double getFitness() const {return fitness;};
 };
 
+/**
+ * @brief 基于网格的二维图
+ * 
+ */
 class Graph
 {
 public:
@@ -86,8 +95,11 @@ public:
     // 获取路径, 反向跟踪
     vector<Point*> calPath(const Point* resPoint);
 
-    // 
+    // 判断Point是否在图中
+    bool isPointExist(const Point& p) const;
 
+    // 绘制地图到终端
+    void drawGraph() const;
 private:
     int width;
     int height;
