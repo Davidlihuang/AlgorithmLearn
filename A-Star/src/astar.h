@@ -12,21 +12,17 @@ class Astar
 {
 public:
     explicit Astar(Graph* g):graph(g){};
-    void run(const Point& start, const Point& end)
-    {
-        
-    };
-
+    bool run(const Tile& start, const Tile& end);
+    void getPath();
 private:
+    Astar();
     Astar(const Astar&);
     Astar& operator=(const Astar&);
     Astar& operator=(const Astar&) const;
-    Astar& operator=(const Astar&&);
-
-
+    
 private:    
     Graph* graph;
-    priority_queue<Point*> openTable;
-    unordered_set<Point*>  closeTable;
-    vector<Point*> Path;
+    priority_queue<Tile*> openTable;
+    unordered_set<Tile*>  closeTable;
+    vector<Tile*> Path;
 };

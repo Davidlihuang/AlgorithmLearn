@@ -6,47 +6,66 @@ using  std::vector;
 using  std::cout;
 using  std::endl;
 
-class  Point
+struct Point
 {
-    double x; //< 物理坐标
+    double x;
     double y;
     
-    int row; ///< 图中的行列数
+    Point(double a=0.0, double b=0.0):x(a),y(b){};
+    bool operator==(Point& other)
+    {
+        return (this->x == other.x)&& (this->y==other.y);
+    }
+    bool operator==(const Point& other) const
+    {
+        return (this->x == other.x)&& (this->y==other.y);
+    }
+};
+class  Tile
+{
+
+private:
+    int row;     //< 图中的行列数
     int col;
+    Point coord; //< 物理坐标
 
     bool isBlock; // 标记障碍物
     bool isVisit; // 访问标记
         
-    double gValue; // start Point  到 current Point的距离代价
-    double hValue; // current Point到 target  Point的距离代价
+    double gValue; // start Tile  到 current Tile的距离代价
+    double hValue; // current Tile到 target  Tile的距离代价
     double fitness; // 当前距离的预估代价： f = g + h 代价函数
     
-    Point* parent; // 保存父亲节点
+    Tile* parent; // 保存父亲节点
 
 public:
-    bool operator==(const Point& other)
+    bool operator==(Tile& other)
     {
-        return (this->x == other.x) && (this->y == other.y);
+        return (this->coord == other.coord);
+    }
+    bool operator==(const Tile& other) const
+    {
+        return (this->coord == other.coord);
     }
     
-    bool operator<(const Point& other)
+    bool operator<(const Tile& other)
     {
         return this->fitness < other.fitness;
     }
-    bool operator<=(const Point& other)
+    bool operator<=(const Tile& other)
     {
         return this->fitness <= other.fitness;
     }
-    bool operator>(const Point& other)
+    bool operator>(const Tile& other)
     {
         return this->fitness > other.fitness;
     }
-    bool operator>=(const Point& other)
+    bool operator>=(const Tile& other)
     {
         return this->fitness >= other.fitness;
     }
 
-    Point(int a = 0, int b =0):row(a),col(b)
+    Tile(const Point& p, int r = 0, int c =0):coord(p), row(r),col(c)
     {
         isBlock = false;
         isVisit = false;
@@ -54,23 +73,42 @@ public:
         hValue = 0;
         fitness = 0;
         parent = nullptr;
-        x = 0.0;
-        y = 0.0;
+
     }
 
-    bool   isVisit() const { return isVisit;};
+    bool   isVisited() const { return isVisit;};
     void   setVisited()  {isVisit = true;} ;
-    void   unSetVisite() {isVisit = false;};
+    void   unSetVisited() {isVisit = false;};
     
     bool   isObstacle() const { return isBlock;};
     void   setObstacle() {isBlock = true;};
     void   unsetObstacle() {isBlock = false;};
 
-    Point* getParent() const{return parent;};
-    void   setParent(Point* p) { parent = p;};
+    Tile*  getParent() const{return parent;};
+    void   setParent(Tile* p) { parent = p;};
+    void   unsetParent(){parent=nullptr;};
 
     void   setFitness(double g, double h){ fitness = g+h;};
     double getFitness() const {return fitness;};
+
+    void setCoord(double a, double b) {coord = Point(a,b);};
+    void setCoord(const Point& p){coord = p;};
+    Point getCoord(){return coord;};
+
+    void setRowCol(int r, int c){
+        row = r;
+        col = c;
+    }
+    std::pair<int, int> getRowCol()
+    {
+        return std::pair<int,int>(row,col);
+    }
+    int getRow() const{return row;};
+    void setRow(int r) {row = r;};
+
+    int getCol() const{return col;};
+    void setCol(int c) {col = c;};
+
 };
 
 /**
@@ -81,31 +119,33 @@ class Graph
 {
 public:
     // 默认地图size(20,20)空白
-    Graph(int w = 20, int h=20);
+    Graph(int row = 20, int col=20);
     // 导入一外部地图
-    Graph(const vector<vector<int>> &originMap);
+    Graph(const vector<vector<int>> &origingraph);
     
-
-    // 将外部输入地图网格
-    void constructGraph();
+    ~Graph();
 
     // 8邻接, 4邻接
-    vector<Point*> neighBours(const Point* curPoint, bool isFull);
+    vector<Tile*> neighBours(const Tile* curTile, bool isFull); //< Tile获取
+    vector<Tile*> neighBours(int r, int c, bool isFull); //行列获取
+    vector<Tile*> neighBours(const Point& p, bool isFull);   //< 物理坐标获取
 
     // 获取路径, 反向跟踪
-    vector<Point*> calPath(const Point* resPoint);
+    vector<Tile*> calPath(const Tile* resTile);
 
-    // 判断Point是否在图中
-    bool isPointExist(const Point& p) const;
-
+    // 判断Tile是否在图中
+    bool isElementExist(const Tile& p)  const;
+    bool isElementExist(int r, int c)   const;
+    bool isElementExist(const Point& p) const;
+    
+    Tile* findElement(const Tile& p);
     // 绘制地图到终端
     void drawGraph() const;
+
 private:
     int width;
     int height;
-    vector<vector<Point*>> map;  // 存放构建的graph
-    vector<Point*>         path; // 存放当前路径
-
-    
+    vector<vector<Tile*>> graph;  // 存放构建的graph
+    vector<Tile*>         path; // 存放当前路径  
 
 };

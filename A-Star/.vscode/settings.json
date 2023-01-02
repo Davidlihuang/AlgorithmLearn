@@ -1,6 +1,13 @@
 {
     "files.associations": {
+        "unordered_graph": "cpp",
+        "unordered_set": "cpp",
+        "queue": "cpp",
+        "vector": "cpp",
         "unordered_map": "cpp",
-        "unordered_set": "cpp"
+        "xhash": "cpp",
+        "xstring": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp"
     }
 }
