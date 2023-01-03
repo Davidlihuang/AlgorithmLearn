@@ -41,6 +41,8 @@ class Astar
 public:
     explicit Astar(Graph* g):graph(g){};
     bool run(const Tile& start, const Tile& end, bool direct=false);
+    double calG(const Tile& curTile, const Tile& neiborTile);
+    double calH(const Tile& curTile, const Tile& targetTile);
     void showOpenTable()
     {
         std::cout << "openTable container size = " << openTable.size() <<std::endl;

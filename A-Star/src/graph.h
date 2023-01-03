@@ -85,12 +85,18 @@ public:
     void   unSetVisited() {isVisit = false;};
     
     bool   isObstacle() const { return isBlock;};
-    void   setObstacle() {isBlock = true;};
+    void   setObstacle(bool b = true) {isBlock = b;};
     void   unsetObstacle() {isBlock = false;};
 
     Tile*  getParent() const{return parent;};
     void   setParent(Tile* p) { parent = p;};
     void   unsetParent(){parent=nullptr;};
+
+    void   setGvalue(double g) {gValue = g;};
+    double getGvalue()const {return gValue;};
+    
+    void setHvalue(double h) {hValue = h;};
+    double getHvalue() const {return hValue;};
 
     void   setFitness(double g, double h)
     { 
