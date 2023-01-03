@@ -3,29 +3,38 @@
 #include <unordered_set>
 #include <unordered_map>
 
-bool Astar::run(const Tile& start, const Tile& target)
+bool Astar::run(const Tile& start, const Tile& target, bool direct)
 {
     // 合法性
-    if(!graph.isElementExist(start) || !graph.isElementExist(target))
+    if(!graph->isElementExist(start) || !graph->isElementExist(target))
     {
         cout << "start or end not in graph!" <<endl;
         return false;
     }
+
     // 取出图中的节点
-    Tile* startTile = graph.findElement(start);
-    Tile* targetTile = graph.findElement(target);
+    Tile* startTile = graph->findElement(start);
+    Tile* targetTile = graph->findElement(target);
     if(startTile == nullptr || targetTile == nullptr)
      {
         std::cout <<"get start and end tile from graph failed!" << std::endl;
          return false;
      }  
 
+    // 清空表
+    closeTable.clear();
+    while(!openTable.empty())
+    {
+        openTable.pop();
+    }
+    
     // 主要算法
-    openTable.push_back(startTile);
+    openTable.emplace(startTile);
     Tile* res = nullptr;
     while(!openTable.empty())
     {
-        Tile* bestTile = openTable.front()
+        Tile* bestTile = openTable.top();
+        openTable.pop();
         if(bestTile == targetTile)
         {
             res = bestTile;
@@ -33,23 +42,24 @@ bool Astar::run(const Tile& start, const Tile& target)
         }
 
         //< 获取所有邻居
-        vector<Tile*> neibour = graph.neighBours(bestTile, false);
-        for(int i=0; i<neibour.size(); i++)
+        // std::cout << "open表的大小：" << openTable.size() << std::endl;
+        // showOpenTable();
+        vector<Tile*> neibour = graph->neighBours(bestTile, direct);
+        for(int i = 0; i < neibour.size(); i++)
         {
             //< 
             Tile* curTile = neibour[i];
 
             //< 计算各点的代价
-            nCoord = curTile->getCoord();
-            sCoord = bestTile->getCoord();
-            tCoord = target.getCoord();
+            Point nCoord = curTile->getCoord();
+            Point sCoord = bestTile->getCoord();
+            Point tCoord = target.getCoord();
             double g = abs(nCoord.x - sCoord.x) + abs(nCoord.y - sCoord.y);
             double h = abs(tCoord.x - nCoord.x) + abs(tCoord.y - nCoord.y);
                 
 
             //< 当前点在close表中什么也不做
-            if((closeTable.find(curTile) != closeTable.end()) && 
-                (bestTile->isObstacle()))
+            if(closeTable.find(curTile) != closeTable.end())
             {
                 continue;
             }
@@ -58,9 +68,9 @@ bool Astar::run(const Tile& start, const Tile& target)
             if(openTable.find(curTile) == openTable.end())
             {
                 //< tile不在open表中
-                curTile->parent = bestTile;
+                curTile->setParent(bestTile);
                 curTile->setFitness(g, h);
-                openTable.push_back(curTile);
+                openTable.emplace(curTile);
             }
             else{
                 // tile在open表中                
@@ -71,8 +81,18 @@ bool Astar::run(const Tile& start, const Tile& target)
                 }
             }
         }
-        openTable.pop_front();
+        
+        
         closeTable.insert(bestTile);
     }
+
+    if(res!= nullptr)
+    {
+        graph->calPath(res);
+        return true;
+    }
+
+    std::cout <<"no resolve!" << std::endl;
+    return false;
 
 }

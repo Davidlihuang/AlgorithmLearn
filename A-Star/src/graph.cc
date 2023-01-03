@@ -61,10 +61,15 @@ Graph::Graph(const vector<vector<int>> &origingraph)
 // 8邻接, 4邻接
 vector<Tile *> Graph::neighBours(const Tile *curTile, bool isFull) //< Tile获取
 {
-
     vector<Tile *> neighbor;
-    if (curTile == nullptr)
+    if ((curTile == nullptr))
         return neighbor;
+    
+    
+    if((curTile->getRow()<0 ||curTile->getRow() >= width) || (curTile->getCol()< 0 || curTile->getCol()>=height))
+        return neighbor;
+
+
     int num = (isFull == true) ? 8 : 4;
     //< 8 近邻
     if (isFull == true)
@@ -73,8 +78,13 @@ vector<Tile *> Graph::neighBours(const Tile *curTile, bool isFull) //< Tile获�
         int y[num] = {0, -1, 0, 1, -1, 1, 1, -1};
         for (int i = 0; i < num; i++)
         {
-            auto e = graph[curTile->getRow() + x[i]][curTile->getCol() + y[i]];
-            neighbor.push_back(e);
+            int r = curTile->getRow() + x[i];
+            int c = curTile->getCol() + y[i];
+            if((r<0 ||r >= width) || (c< 0 || c>=height))
+                continue;
+            auto e = graph[r][c];
+            if(e->isObstacle() == false)
+                neighbor.push_back(e);
         }
     }
     else
@@ -83,16 +93,22 @@ vector<Tile *> Graph::neighBours(const Tile *curTile, bool isFull) //< Tile获�
         int y[num] = {0, -1, 0, 1};
         for (int i = 0; i < num; i++)
         {
-            auto e = graph[curTile->getRow() + x[i]][curTile->getCol() + y[i]];
-            neighbor.push_back(e);
+            int r = curTile->getRow() + x[i];
+            int c = curTile->getCol() + y[i];
+            if((r<0 ||r >= width) || (c< 0 || c>=height))
+                continue;
+            auto e = graph[r][c];
+            if(e->isObstacle() == false)
+                neighbor.push_back(e);
         }
     }
-    std::cout << "neibour: [";
-    for (int i = 0; i < num; i++)
-    {
-        std::cout << "( " << neighbor[i]->getRow() << ", " << neighbor[i]->getCol() << " ), ";
-    }
-    std::cout << "]"<<endl;
+    // std::cout << "neibour: [";
+    // for (int i = 0; i < neighbor.size(); i++)
+    // {
+    //     std::cout << "( " << neighbor[i]->getRow() << ", " << neighbor[i]->getCol() << " ), ";
+    //      //std::cout << "( " << neighbor[i] << ", " << neighbor[i] << " ), ";
+    // }
+    // std::cout << "]"<<endl;
     return neighbor;
 }
 
@@ -103,6 +119,7 @@ vector<Tile *> Graph::neighBours(int r, int c, bool isFull) // 行列获取
         (c < 0 || c >= height))
         return vecTile;
     Tile *tile = graph[r][c];
+    if(tile->isObstacle()) return vecTile;
     vecTile = this->neighBours(tile, isFull);
     return vecTile;
 }
@@ -118,7 +135,7 @@ bool Graph::isElementExist(const Tile &p) const
 {
     for (int i = 0; i < width; i++)
     {
-        for (int j = 0; height; j++)
+        for (int j = 0; j< height; j++)
         {
             if (p == *graph[i][j])
                 return true;
@@ -132,10 +149,11 @@ Graph::~Graph()
     {
         for(int j = 0; j <height; j++)
         {
-            delete graph[i][j];
-            graph.clear();
+            //delete graph[i][j];
+            ;
         }
     }
+    graph.clear();
 }
 
 bool Graph::isElementExist(int r, int c) const
@@ -166,15 +184,46 @@ Tile* Graph::findElement(const Tile& p)
     }
     return nullptr;
 }
+
+vector<Tile*> Graph::calPath(Tile* resTile)
+{
+    
+    if(resTile == nullptr) return this->path;
+    auto tmpTile = resTile;
+    while(tmpTile != nullptr)
+    {
+        tmpTile->setPathed();
+        tmpTile->setObstacle();
+        this->path.push_back(tmpTile);
+        tmpTile = tmpTile->getParent();
+    }
+    //drawGraph();
+    return this->path;
+}
+
+
 void Graph::drawGraph() const
 {
     cout << "graph: " << endl;
+    cout <<"   ";
+    for (int j = 0; j < height; j++)
+    {
+        cout << j << ", " ;
+    }
+    cout << endl;
     for (int i = 0; i < width; i++)
     {
-        cout << "[";
+        cout << i <<":[";
         for (int j = 0; j < height; j++)
         {
-            cout << graph[i][j]->isObstacle() << ", ";
+            if(graph[i][j]->isPathed())
+            {
+                cout << "*" << ", ";
+            }
+            else{
+               cout << graph[i][j]->isObstacle() << ", ";
+            }
+            
         }
         cout << "]" << endl;
     }

@@ -31,7 +31,7 @@ private:
 
     bool isBlock; // 标记障碍物
     bool isVisit; // 访问标记
-        
+    bool isPath;  // 被路径占用     
     double gValue; // start Tile  到 current Tile的距离代价
     double hValue; // current Tile到 target  Tile的距离代价
     double fitness; // 当前距离的预估代价： f = g + h 代价函数
@@ -39,6 +39,9 @@ private:
     Tile* parent; // 保存父亲节点
 
 public:
+    bool isPathed() const{return isPath;};
+    void  setPathed() {isPath = true;};
+    
     bool operator==(Tile& other)
     {
         return (this->coord == other.coord);
@@ -73,6 +76,7 @@ public:
         hValue = 0;
         fitness = 0;
         parent = nullptr;
+        isPath = false;
 
     }
 
@@ -88,12 +92,17 @@ public:
     void   setParent(Tile* p) { parent = p;};
     void   unsetParent(){parent=nullptr;};
 
-    void   setFitness(double g, double h){ fitness = g+h;};
+    void   setFitness(double g, double h)
+    { 
+        this->gValue = g;
+        this->hValue = h;
+        this->fitness = g+h;
+    };
     double getFitness() const {return fitness;};
 
     void setCoord(double a, double b) {coord = Point(a,b);};
     void setCoord(const Point& p){coord = p;};
-    Point getCoord(){return coord;};
+    Point getCoord()const {return coord;};
 
     void setRowCol(int r, int c){
         row = r;
@@ -131,7 +140,7 @@ public:
     vector<Tile*> neighBours(const Point& p, bool isFull);   //< 物理坐标获取
 
     // 获取路径, 反向跟踪
-    vector<Tile*> calPath(const Tile* resTile);
+    vector<Tile*> calPath(Tile* resTile);
 
     // 判断Tile是否在图中
     bool isElementExist(const Tile& p)  const;
