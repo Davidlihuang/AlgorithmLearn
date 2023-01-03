@@ -102,13 +102,13 @@ vector<Tile *> Graph::neighBours(const Tile *curTile, bool isFull) //< TileèŽ·å
                 neighbor.push_back(e);
         }
     }
-    // std::cout << "neibour: [";
-    // for (int i = 0; i < neighbor.size(); i++)
-    // {
-    //     std::cout << "( " << neighbor[i]->getRow() << ", " << neighbor[i]->getCol() << " ), ";
-    //      //std::cout << "( " << neighbor[i] << ", " << neighbor[i] << " ), ";
-    // }
-    // std::cout << "]"<<endl;
+    std::cout << "neibour: [";
+    for (int i = 0; i < neighbor.size(); i++)
+    {
+        std::cout << "( " << neighbor[i]->getRow() << ", " << neighbor[i]->getCol() << " ), ";
+         //std::cout << "( " << neighbor[i] << ", " << neighbor[i] << " ), ";
+    }
+    std::cout << "]"<<endl;
     return neighbor;
 }
 
@@ -218,7 +218,7 @@ void Graph::drawGraph() const
         {
             if(graph[i][j]->isPathed())
             {
-                cout << "*" << ", ";
+                cout << graph[i][j]->getFitness() << ", ";
             }
             else{
                cout << graph[i][j]->isObstacle() << ", ";

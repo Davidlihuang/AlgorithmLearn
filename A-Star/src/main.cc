@@ -36,7 +36,7 @@ int main()
     // start1.setObstacle();
     // target1.setObstacle();
     
-     status = algo.run(start1, target1, false);
+    //status = algo.run(start1, target1, false);
     graph.drawGraph();
 
     // start1.unsetObstacle();
@@ -44,13 +44,13 @@ int main()
     // start.setObstacle();
     // target.setObstacle();
    
-status = algo.run(start, target, false);
+    //status = algo.run(start, target, false);
     
     
 
-    Tile start2(Point(0, 2));
-    Tile target2(Point(4, 2));
-    //status = algo.run(start2, target2, false);
+    Tile start2(Point(1, 1));
+    Tile target2(Point(3, 1));
+    status = algo.run(start2, target2, false);
 
 
     Tile start3(Point(0, 2));
