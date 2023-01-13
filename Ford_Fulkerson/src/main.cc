@@ -24,7 +24,7 @@ int main()
     //     << ", " << ptEdge[i]->flow
     //     << ")";
     //     cout << endl;
-    // }
+    // }this->nodeQue
     
     // auto ntEdge = graph.getNegtiveEdge(1);
     // cout << "反向弧：" << endl;

@@ -1,6 +1,11 @@
 #include "graph.h"
 using namespace networkflow;
-Graph::Graph() : nodeNums(0), edgeNums(0) { graph.clear(); };
+Graph::Graph() : 
+    nodeNums(0), edgeNums(0) 
+{ 
+    graph.clear();
+    maxflow = 0;
+ }
 
 // 标准输入流读入
 void Graph::readGraphFromStdInputStream(int nodeNum)

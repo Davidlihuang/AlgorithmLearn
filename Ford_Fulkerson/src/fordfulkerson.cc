@@ -12,7 +12,7 @@ Fordfulkson::Fordfulkson(Graph* g):
     {
         labelVec.push_back(label); // n个节点标记初始化
     }
-    
+    maxFlow = 0;
 }
 
 void  Fordfulkson::run(int source, int target)
@@ -26,13 +26,14 @@ void  Fordfulkson::run(int source, int target)
         //重置所有标号
         for(int i=0; i< labelVec.size(); i++)
         {
-            labelVec[i].set(-1,0,0);
+            labelVec[i].set(-1,-1,0);
         }
 
         // 源节点初始化
         labelVec[source].set(0, source, inf);
         
         //广度优先获取增广路径,汇点没有被标记时，没有找到增广路
+        this->nodeQue.clear();
         this->nodeQue.push_back(source);
        while(!nodeQue.empty() && (labelVec[target].flag == -1))
         {
@@ -42,7 +43,7 @@ void  Fordfulkson::run(int source, int target)
             ///< 获取定点v的“正向弧”和“反向弧”
             //正向弧处理
             auto positiveNode = graph->getPositiveEdge(vNode);
-            cout << "current V: " << vNode << " parent: " << labelVec[vNode].parent << endl;
+           // cout << "current V: " << vNode << " parent: " << labelVec[vNode].parent << endl;
             for(int i=0; i< positiveNode.size(); i++)
             {
                 ArcType* arc = positiveNode[i];
@@ -58,7 +59,7 @@ void  Fordfulkson::run(int source, int target)
                         labelVec[neiborV].parent = vNode; //标记父亲节点
                         labelVec[neiborV].alpha  = min(labelVec[vNode].alpha,diffFlow); // 改进量
                         nodeQue.push_back(neiborV);   //标记后节点放入队列
-                        cout << vNode << "-> " << neiborV << endl;
+                        //cout << vNode << "-> " << neiborV << endl;
                     }
                 }
             }
@@ -78,7 +79,7 @@ void  Fordfulkson::run(int source, int target)
                     {
                         labelVec[neiborV].flag = 0;        //标记为标记未检查
                         labelVec[neiborV].parent = -vNode; //标记父亲节点
-                        labelVec[neiborV].alpha  = min(labelVec[vNode].alpha,diffFlow); // 改进量
+                        labelVec[neiborV].alpha  = min(labelVec[vNode].alpha, diffFlow); // 改进量
                         nodeQue.push_back(neiborV);   //标记后节点放入队列
                     }
                 }
@@ -95,12 +96,12 @@ void  Fordfulkson::run(int source, int target)
         //保存历史增广路径
         int current = target;
         vector<int> path;  // 历史增广路径
-        while(current != labelVec[current].parent)
+        path.push_back(current);
+       do
         {
-
-            path.push_back(current);
             current = abs(labelVec[current].parent);
-        }
+             path.push_back(current);
+        } while(current != labelVec[current].parent);
         this->historyPath.push_back(path);
         
         //调整网络可行流
@@ -112,12 +113,12 @@ void  Fordfulkson::run(int source, int target)
             int  parent = labelVec[current].parent;
             // 前向弧调整
             ArcType* arc = nullptr;
-            if(parent>  0)
+            if(parent>=  0)
             {
                 bool valid = graph->getEdge(parent, current, &arc);
                 if(valid && (arc != nullptr))
                 {
-                    arc->flow += labelVec[current].alpha;
+                    arc->flow += labelVec[target].alpha;
                 }
             }
             else
@@ -127,12 +128,15 @@ void  Fordfulkson::run(int source, int target)
                 bool valid = graph->getEdge(current, parent, &arc);
                 if(valid && (arc!= nullptr))
                 {
-                    arc->flow -= labelVec[current].alpha;
+                    arc->flow -= labelVec[target].alpha;
                 }
             }
             current = abs(parent);
         }
-
-        
     } //end of while(true)
+
+   /// calculate max flow
+   this->maxFlow = graph->getMaxFlow();
+   cout << "maxflow = " << this->maxFlow << endl;
+
 }

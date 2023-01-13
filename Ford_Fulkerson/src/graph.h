@@ -70,7 +70,26 @@ namespace networkflow
             return true;
         }
 
+        int getMaxFlow()
+        {
+            for(int i=0; i< nodeNums; i++)
+            {
+                for(int j =0; j< nodeNums; j++)
+                {
+                    if(i == 0 && graph[i][j] != nullptr) 
+                    {
+                        this->maxflow += graph[i][j]->flow;
+                    }
+                    if(graph[i][j] != nullptr)
+                    {
+                        cout << "edage: (" << i << "->" << j << ")  flow: " << graph[i][j]->flow<< endl; 
+                    }
+                }
+            }
+            return this->maxflow;
+        }
     private:
+        int maxflow;
         int nodeNums;
         int edgeNums;
         vector<vector<ArcType*>> graph; //邻接矩阵表示
