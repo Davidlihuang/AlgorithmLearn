@@ -21,12 +21,20 @@ void  Fordfulkson::run(int source, int target)
     this->target = target;
     while(true) //穷尽所有增广路
     {
+        
+        
+        //重置所有标号
+        for(int i=0; i< labelVec.size(); i++)
+        {
+            labelVec[i].set(-1,0,0);
+        }
+
         // 源节点初始化
         labelVec[source].set(0, source, inf);
-        this->nodeQue.push_back(source);
-
+        
         //广度优先获取增广路径,汇点没有被标记时，没有找到增广路
-        while(!nodeQue.empty() && (labelVec[target].flag == -1))
+        this->nodeQue.push_back(source);
+       while(!nodeQue.empty() && (labelVec[target].flag == -1))
         {
             int vNode = this->nodeQue.front();
             this->nodeQue.pop_front();
