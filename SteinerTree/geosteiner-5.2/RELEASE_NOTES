@@ -1,0 +1,235 @@
+# **********************************************************************
+#
+#	$Id: RELEASE_NOTES,v 1.5 2022/11/19 13:45:49 warme Exp $
+#
+#	File:	RELEASE_NOTES
+#	Rev:	e-4
+#	Date:	11/18/2022
+#
+#	Copyright (c) 2015, 2022 by David M. Warme, Pawel Winter, and
+#	Martin Zachariasen.  This work is licensed under a Creative
+#	Commons Attribution-NonCommercial 4.0 International License.
+#
+# **********************************************************************
+#
+#	Modification Log:
+#
+#	e-1:	12/12/2015	warme
+#		: For version 5.0.1.
+#	e-2:	09/05/2016	warme
+#		: For version 5.1.
+#		: Change notices for 5.1 release.
+#	e-3:	09/24/2016	warme
+#		: Additional tweaks for 5.1 release.
+#	e-4:	11/18/2022	warme
+#		: For version 5.2.
+#
+# **********************************************************************
+
+
+1.	What has changed?
+
+GeoSteiner 5.2 contains significant enhancements that provide
+additional functionality over the previous release (5.1):
+
+ * New solver accessor functions:
+
+	- gst_get_solver_hypergraph: returns the solver's hypergraph.
+
+	- gst_get_solver_param: returns the solver's parameter object.
+
+	- gst_get_solver_status: returns the solver's solution status.
+
+ * The following new algorithmic parameters have been added:
+
+	- Sparse_Subtours: When enabled, the software automatically uses
+	  either the normal subtour inequality, or the subtour
+	  inequality subtracted from the one equation in the formulation
+	  -- which ever results in an inequality having the fewest
+	  non-zero coefficients.  If disabled, the software always uses
+	  the normal subtour inequality.  (This functionality was
+	  previously a compile-time option.)
+
+	- Zero_Weight_Cutsets_Method: Selects the constraints generated
+	  in response to an LP solution whose support hypergraph has 2
+	  or more connected components.  For each connected component
+	  (Vi,Ei), the software (by default) generates a pair of subtour
+	  inequalities: one for Vi and another for V-Vi.  The other
+	  alternative (not recommended) is to generate a cutset
+	  constraint x(Vi:V-Vi) >= 1.  (This functionality was
+	  previously a compile-time option.)
+
+	- BB_Node_Limit: When set to a positive integer N, this
+          parameter causes optimization to abort after completely
+          processing N branch-and-bound nodes (but before any branch
+          variable is selected for the N-th node).  The default is 0,
+          which allows an unlimited number of branch-and-bound nodes to
+          be processed.
+
+	- BB_LP_Limit: When set to a positive integer N, this parameter
+          causes optimization to abort after solving N iterations of LP
+          optimize, primal heuristic, separation oracle steps.  This
+          check is made between the primal heuristic and separation
+          oracle, so that a new upper bound can be discovered from the
+          N-th LP.
+
+	- Strengthen_Reduce: If enabled (the default), violated subtour
+          inequalities S produced by the deterministic flow separator
+          are strengthened by: (1) forming the support sub-hypergraph
+          H' induced by S; (2) applying the same reductions to H' that
+          are used to produce smaller instances entering the separation
+          oracle (single-vertex deletion, connected components, and
+          biconnected components).  If disabled, only the original
+          subtour S discovered by the deterministic flow separator is
+          generated.
+
+	- Generate_Unstrengthened: If enabled (the default), the
+          original violated subtour S obtained by the deterministic flow
+          separator is always generated (even if Strengthen_Reduce
+          obtains other smaller, stronger violated subtours).  If
+          disabled, this original subtour S is not generated unless
+          Strengthen_Reduce produces no other violated subtours.
+
+	- Initial_Primal_Heuristic: If enabled, the primal heuristic is
+          run once even before any LPs are solved.  This may produce a
+          valid upper bound *very* early in the run.  When disabled (the
+          default), the primal heuristic is only run once per LP
+          optimize / separate iteration.  This parameter can be used in
+          conjuction with the next.
+
+	- Initial_Primal_Heur_Stop: When this parameter and
+          Initial_Primal_Heuristic are both enabled, then optimization
+          will abort immediately after this first call to the primal
+          heuristic -- before any LP is solved.  This can produce a
+          heuristic solution *very* quickly.
+
+ * A fully functional Callback API is now provided, permitting a
+   user-specified function to be called from various points within the
+   GeoSteiner optimization algorithms.  The user-specified callback
+   function has the following type signature:
+
+	typedef void gst_bb_callback_func_t (GST_BB_CALLBACK_ARGS);
+
+   where GST_BB_CALLBACK_ARGS is a macro that allows user-specified
+   callback functions to be defined in a manner that adjusts to
+   changes in GeoSteiner's callback function calling conventions.
+   This macro currently expands to the following list of formal
+   parameters:
+
+	int		wherefrom,	/* where callback is from */
+	gst_node_ptr	node,		/* node accessor object */
+	void *		cb_data		/* user-specified data */
+
+  The following new API permits the user to establish a callback
+  function to be invoked during hypergraph optimization
+  (branch-and-bound):
+
+	- int gst_set_bb_callback_func (
+			struct gst_solver *	solver,
+			bb_callback_func_t *	cb_func,
+			void *			cb_data);
+
+   The following callback points (values of the wherefrom argument)
+   are currently supported:
+
+	- GST_CALLBACK_BB_LP_SOLVED: Invoked each time a node finishes
+	  solving its LP over the constraint pool.
+
+	- GST_CALLBACK_BB_NEW_UPPER_BOUND: Invoked each time an improved
+	  integer feasible solution is discovered.
+
+	- GST_CALLBACK_BB_NODE_COMPLETED: Invoked when all processing on
+          a node is finished.
+
+   The following new functions permit the user-specified function to
+   access a variety of internal state from the GeoSteiner optimization
+   routines (all of these take a single gst_node_ptr argument):
+
+	- gst_node_get_solver: returns the solution state object.
+
+	- gst_node_get_z: returns the current LP objective value.
+
+	- gst_node_get_lp_status: returns the "lower bound status" of
+          the current node.
+
+	- gst_node_get_node_index: returns the index of the current
+          node.
+
+	- gst_node_get_parent_node_index: returns the index of the
+          parent of the current node.
+
+	- gst_node_get_node_depth: returns the depth of the current
+          node.
+
+	- gst_node_get_node_branch_var: returns the branch variable used
+          to create the current node from its parent.
+
+	- gst_node_get_node_branch_direction: returns the branch
+          direction (0 = down, 1 = up).
+
+	- gst_node_get_lp_index: returns the number of LP/separate
+	  iterations performed at the current node.
+
+	- gst_node_get_solution: returns the LP solution vector of the
+          current node.
+
+	- gst_node_get_lb: returns the lower bounds for the current
+          node's LP.
+
+	- gst_node_get_ub: returns the upper bounds for the current
+	  node's LP.
+
+ * The code now deletes slack rows of a node *only* when the LP
+   objective of the node has strictly improved (or just after the node
+   has been created by branching).  This prevents infinite loops and/or
+   thrashing of rows, but can also result in huge LP's on severely
+   degenerate problems.
+
+ * Improved the prelude.ps file to support much larger numbers of
+   terminals than previously.  (Most Postscript interpreters do not
+   permit arrays larger than 65536 elements.  The new code uses arrays
+   of at most 32768 elements to form a trie of terminals.  This can run
+   out of memory, but it should not overflow implementation limits on
+   array size.)
+
+ * Definition of parameter values within geosteiner.h now matches the
+   order in which these parameters are documented within the manual.
+
+ * The default value of MAX_CUTSET_ENUMERATE_COMPS parameter was
+   incorrectly documented to be 11 in the manual.  It now correctly
+   specifies the default value of 5.
+
+ * Fixed a looping bug in LOCAL_CUTS_MODE_SUBTOUR_COMPONENT mode.
+
+ * Fixed a big O(n**2) memory waste relating to find_comps() in the
+   zero-weight cutsets separation code.
+
+ * Fixed a fairly serious bug in which all "strengthened" subtours were
+   being thrown away, never entering either the constraint pool nor the
+   LP.  This bug was caused by the unfortunate inter-mingling of two
+   pieces of code:
+
+	- The code to actually emit the strengthened subtour
+          inequalities; and
+
+	- Code that is intended to create Postscript plots of situations
+          in which the constraint strengthening code splits an original
+          violated subtour into 3 or more smaller, stronger violated
+          subtours.
+
+   The latter plotting code was disabled with #if 0 ... #endif.  Because
+   of the inter-mingling, this also disabled transfer of these
+   strengthened inequalities into the constraint pool and/or LP.  These
+   two distinct functionalities have now been teased apart, thereby
+   restoring proper functioning of the constraint strengthening
+   mechanism.
+
+ * Fixed a large number of compiler -Wall warnings detected by newer
+   versions of GCC.
+
+ * Removed -Werror from the default value of CFLAGS.  Using -Werror is
+   quite useful for GeoSteiner developers, but most users don't like it
+   when their build fails for reasons that they don't understand, and
+   might not know how to fix.  Added a --with-Werror argument to the
+   configure script to turn -Werror on.  Also changed the default value
+   of OPTFLAGS from -O2 to -O3.
