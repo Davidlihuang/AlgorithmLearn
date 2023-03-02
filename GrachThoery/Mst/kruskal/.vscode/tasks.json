@@ -6,9 +6,9 @@
             "command": "/usr/bin/g++",
             "args": [
               "-g", 
-              "${workspaceFolder}/src/main.cc",
-              "${workspaceFolder}/src/graph.cc",
-              "${workspaceFolder}/src/astar.cc",
+              "${workspaceFolder}/src/kruskal.cpp",
+              "-I",
+              "${workspaceFolder}/src/unionSet.h",
               "-o", 
               "${workspaceFolder}/${fileBasenameNoExtension}",
               "-std=c++17"],
