@@ -1,0 +1,286 @@
+[parsing file]../input/u_core_context.sdc
+num_net: 0
+[parsing file]../input/u_mem_context2.sdc
+num_net: 0
+[parsing file]../input/u_mem_context1.sdc
+num_net: 0
+[num net] 89
+net#0 IO/XTAL1: 0
+Signal0 u_core_context/XTAL1: -1
+
+net#1 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[7]: 0.275615
+Signal1 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[7]: 0.879943
+
+net#2 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[6]: 0.277945
+Signal2 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[6]: 0.893332
+
+net#3 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[5]: 0.277724
+Signal3 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[5]: 0.882538
+
+net#4 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[4]: 0.335635
+Signal4 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[4]: 0.885043
+
+net#5 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[3]: 0.294328
+Signal5 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[3]: 0.899878
+
+net#6 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[2]: 0.295234
+Signal6 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[2]: 0.890246
+
+net#7 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[1]: 0.289351
+Signal7 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[1]: 0.897781
+
+net#8 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[0]: 0.294793
+Signal8 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_data_out[0]: 0.893867
+
+net#9 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_chip_select: -0.0767015
+Signal9 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3_chip_select: 1.53183
+
+net#10 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3__Logic1_: 0
+Signal10 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3__Logic1_: 0
+
+net#11 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3__Logic0_: 0
+Signal11 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_sBRAM3__Logic0_: 0
+
+net#12 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[7]: 0.312927
+Signal12 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[7]: 0.894484
+
+net#13 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[6]: 0.283133
+Signal13 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[6]: 0.879178
+
+net#14 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[5]: 0.290254
+Signal14 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[5]: 0.884025
+
+net#15 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[4]: 0.281932
+Signal15 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[4]: 0.885075
+
+net#16 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[3]: 0.281273
+Signal16 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[3]: 0.882589
+
+net#17 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[2]: 0.318453
+Signal17 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[2]: 0.879082
+
+net#18 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[1]: 0.292121
+Signal18 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[1]: 0.89066
+
+net#19 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[0]: 0.281715
+Signal19 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_data_out[0]: 0.890953
+
+net#20 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_chip_select: -0.0862526
+Signal20 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2_chip_select: 1.47388
+
+net#21 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2__Logic1_: 0
+Signal21 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2__Logic1_: 0
+
+net#22 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2__Logic0_: 0
+Signal22 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_sBRAM2__Logic0_: 0
+
+net#23 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_n3: 0.0819227
+Signal23 u_mem_context1/u_ahb_ram_genblk3_u_fpga_sram_n3: 1.55576
+
+net#24 u_core_context/u_ahb_ram_genblk3_u_fpga_sram_n2: 0.106004
+Signal24 u_mem_context2/u_ahb_ram_genblk3_u_fpga_sram_n2: 1.52486
+
+net#25 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[31]: 0.103657
+Signal25 u_mem_context2/u_ahb_ram_genblk3_SRAMWDATA[31]: 1.10648
+
+net#26 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[30]: 0.114527
+Signal26 u_mem_context2/u_ahb_ram_genblk3_SRAMWDATA[30]: 1.22229
+
+net#27 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[29]: 0.105903
+Signal27 u_mem_context2/u_ahb_ram_genblk3_SRAMWDATA[29]: 1.1177
+
+net#28 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[28]: 0.144663
+Signal28 u_mem_context2/u_ahb_ram_genblk3_SRAMWDATA[28]: 1.3128
+
+net#29 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[27]: 0.134515
+Signal29 u_mem_context2/u_ahb_ram_genblk3_SRAMWDATA[27]: 1.0738
+
+net#30 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[26]: 0.133149
+Signal30 u_mem_context2/u_ahb_ram_genblk3_SRAMWDATA[26]: 1.06473
+
+net#31 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[25]: 0.163138
+Signal31 u_mem_context2/u_ahb_ram_genblk3_SRAMWDATA[25]: 1.18974
+
+net#32 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[24]: -0.113968
+Signal32 u_mem_context2/u_ahb_ram_genblk3_SRAMWDATA[24]: 1.01494
+
+net#33 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[23]: 0.17397
+Signal33 u_mem_context1/u_ahb_ram_genblk3_SRAMWDATA[23]: 1.06008
+
+net#34 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[22]: 0.148767
+Signal34 u_mem_context1/u_ahb_ram_genblk3_SRAMWDATA[22]: 1.11972
+
+net#35 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[21]: 0.161035
+Signal35 u_mem_context1/u_ahb_ram_genblk3_SRAMWDATA[21]: 1.01133
+
+net#36 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[20]: 0.143816
+Signal36 u_mem_context1/u_ahb_ram_genblk3_SRAMWDATA[20]: 1.06996
+
+net#37 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[19]: 0.123346
+Signal37 u_mem_context1/u_ahb_ram_genblk3_SRAMWDATA[19]: 1.08573
+
+net#38 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[18]: -0.0938487
+Signal38 u_mem_context1/u_ahb_ram_genblk3_SRAMWDATA[18]: 1.05752
+
+net#39 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[17]: 0.124848
+Signal39 u_mem_context1/u_ahb_ram_genblk3_SRAMWDATA[17]: 1.00889
+
+net#40 u_core_context/u_ahb_ram_genblk3_SRAMWDATA[16]: 0.120471
+Signal40 u_mem_context1/u_ahb_ram_genblk3_SRAMWDATA[16]: 1.00202
+
+net#41 u_core_context/u_ahb_ram_genblk3_SRAMADDR[11]: 0.181211
+Signal41 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[11]: 1.4152
+Signal41 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[11]: 1.41226
+
+net#42 u_core_context/u_ahb_ram_genblk3_SRAMADDR[10]: 0.001375
+Signal42 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[10]: 1.50204
+Signal42 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[10]: 1.50064
+
+net#43 u_core_context/u_ahb_ram_genblk3_SRAMADDR[9]: 0.0466295
+Signal43 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[9]: 1.45779
+Signal43 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[9]: 1.45706
+
+net#44 u_core_context/u_ahb_ram_genblk3_SRAMADDR[8]: 0.0167855
+Signal44 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[8]: 1.57609
+Signal44 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[8]: 1.57541
+
+net#45 u_core_context/u_ahb_ram_genblk3_SRAMADDR[7]: 0.0722327
+Signal45 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[7]: 1.71697
+Signal45 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[7]: 1.71575
+
+net#46 u_core_context/u_ahb_ram_genblk3_SRAMADDR[6]: 0.0356682
+Signal46 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[6]: 1.73933
+Signal46 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[6]: 1.73813
+
+net#47 u_core_context/u_ahb_ram_genblk3_SRAMADDR[5]: -0.00200925
+Signal47 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[5]: 1.56514
+Signal47 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[5]: 1.56466
+
+net#48 u_core_context/u_ahb_ram_genblk3_SRAMADDR[4]: 0.180449
+Signal48 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[4]: 1.60361
+Signal48 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[4]: 1.60261
+
+net#49 u_core_context/u_ahb_ram_genblk3_SRAMADDR[3]: 0.0353547
+Signal49 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[3]: 1.41475
+Signal49 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[3]: 1.41345
+
+net#50 u_core_context/u_ahb_ram_genblk3_SRAMADDR[2]: 0.042995
+Signal50 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[2]: 1.7028
+Signal50 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[2]: 1.70163
+
+net#51 u_core_context/u_ahb_ram_genblk3_SRAMADDR[1]: 0.0236693
+Signal51 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[1]: 1.66382
+Signal51 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[1]: 1.66318
+
+net#52 u_core_context/u_ahb_ram_genblk3_SRAMADDR[0]: 0.102108
+Signal52 u_mem_context2/u_ahb_ram_genblk3_SRAMADDR[0]: 1.58318
+Signal52 u_mem_context1/u_ahb_ram_genblk3_SRAMADDR[0]: 1.58294
+
+net#53 IO/SWDIOTMS: 0
+
+net#54 IO/SWCLKTCK: 0
+
+net#55 IO/P1[15]: 0
+Signal55 u_core_context/P1[15]: 0.369542
+
+net#56 IO/P1[14]: 0
+Signal56 u_core_context/P1[14]: 0.364501
+
+net#57 IO/P1[13]: 0
+Signal57 u_core_context/P1[13]: 0.372657
+
+net#58 IO/P1[12]: 0
+Signal58 u_core_context/P1[12]: 0.381264
+
+net#59 IO/P1[11]: 0
+Signal59 u_core_context/P1[11]: 0.389138
+
+net#60 IO/P1[10]: 0
+Signal60 u_core_context/P1[10]: 0.377885
+
+net#61 IO/P1[9]: 0
+Signal61 u_core_context/P1[9]: 0.365706
+
+net#62 IO/P1[8]: 0
+Signal62 u_core_context/P1[8]: 0.377098
+
+net#63 IO/P1[7]: 0
+Signal63 u_core_context/P1[7]: 0.379425
+
+net#64 IO/P1[6]: 0
+Signal64 u_core_context/P1[6]: 0.350017
+
+net#65 IO/P1[5]: 0
+Signal65 u_core_context/P1[5]: 0.400736
+
+net#66 IO/P1[4]: 0
+Signal66 u_core_context/P1[4]: 0.342904
+
+net#67 IO/P1[3]: 0
+Signal67 u_core_context/P1[3]: 0.411634
+
+net#68 IO/P1[2]: 0
+Signal68 u_core_context/P1[2]: 0.364862
+
+net#69 IO/P1[1]: 0
+Signal69 u_core_context/P1[1]: 0.430184
+
+net#70 IO/P1[0]: 0
+Signal70 u_core_context/P1[0]: 0.379696
+
+net#71 IO/P0[15]: 0
+Signal71 u_core_context/P0[15]: 0.392438
+
+net#72 IO/P0[14]: 0
+Signal72 u_core_context/P0[14]: 0.401517
+
+net#73 IO/P0[13]: 0
+Signal73 u_core_context/P0[13]: 0.380729
+
+net#74 IO/P0[12]: 0
+Signal74 u_core_context/P0[12]: 0.376302
+
+net#75 IO/P0[11]: 0
+Signal75 u_core_context/P0[11]: 0.383853
+
+net#76 IO/P0[10]: 0
+Signal76 u_core_context/P0[10]: 0.35199
+
+net#77 IO/P0[9]: 0
+Signal77 u_core_context/P0[9]: 0.390122
+
+net#78 IO/P0[8]: 0
+Signal78 u_core_context/P0[8]: 0.399542
+
+net#79 IO/P0[7]: 0
+Signal79 u_core_context/P0[7]: 0.367842
+
+net#80 IO/P0[6]: 0
+Signal80 u_core_context/P0[6]: 0.364754
+
+net#81 IO/P0[5]: 0
+Signal81 u_core_context/P0[5]: 0.376644
+
+net#82 IO/P0[4]: 0
+Signal82 u_core_context/P0[4]: 0.380799
+
+net#83 IO/P0[3]: 0
+Signal83 u_core_context/P0[3]: 0.370947
+
+net#84 IO/P0[2]: 0
+Signal84 u_core_context/P0[2]: 0.380102
+
+net#85 IO/P0[1]: 0
+Signal85 u_core_context/P0[1]: 0.379494
+
+net#86 IO/P0[0]: 0
+Signal86 u_core_context/P0[0]: 0.356122
+
+net#87 IO/NRST: 0
+
+net#88 IO/gated_hclk: 0
+Signal88 u_mem_context2/gated_hclk: -1
+Signal88 u_mem_context1/gated_hclk: -1
+
+../output/u_mem_context2-LPD.csv
+../output/u_mem_context1-LPD.csv
