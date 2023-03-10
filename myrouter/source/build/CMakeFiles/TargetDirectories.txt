@@ -1,0 +1,3 @@
+/home/huangli/MyLearning/AlgorithmLearn/myrouter/src/build/CMakeFiles/pcbRouter.dir
+/home/huangli/MyLearning/AlgorithmLearn/myrouter/src/build/CMakeFiles/edit_cache.dir
+/home/huangli/MyLearning/AlgorithmLearn/myrouter/src/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,1 @@
+/usr/bin/c++ -pthread CMakeFiles/pcbRouter.dir/main.cpp.o CMakeFiles/pcbRouter.dir/dsnparser.cpp.o CMakeFiles/pcbRouter.dir/mymath.cpp.o -o pcbRouter 
