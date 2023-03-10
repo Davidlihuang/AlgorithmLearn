@@ -1,5 +1,0 @@
-./contrib/download_prerequisites
-mkdir gcc-build-7.5.0
-cd gcc-build-7.5.0
-../configure --prefix=${PWD} --enable-checking=release --enable-languages=c,c++ --disable-multilib
-make && make install
