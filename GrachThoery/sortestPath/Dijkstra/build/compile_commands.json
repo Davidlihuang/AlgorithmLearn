@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/huangli/Learning/AlgorithmLearn/GrachThoery/sortestPath/Dijkstra/build",
+  "command": "/usr/bin/g++ -g -std=gnu++11 -o CMakeFiles/Dijkstra.dir/dijkstra.cpp.o -c /home/huangli/Learning/AlgorithmLearn/GrachThoery/sortestPath/Dijkstra/dijkstra.cpp",
+  "file": "/home/huangli/Learning/AlgorithmLearn/GrachThoery/sortestPath/Dijkstra/dijkstra.cpp"
+}
+]
