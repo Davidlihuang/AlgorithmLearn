@@ -94,14 +94,14 @@ bool Astar::run(const Tile& start, const Tile& target, bool direct)
                 {
                     // 优先队列中保存的是指针，指针所指向对象的值改变时是否触发排序？ 测试会的
                     curTile->setFitness(g, h);
-                    curTile->setParent(bestTile);
+                    curTile->setBackwardParent(bestTile);
                 }
             }
             else //if(openTable.find(curTile) == openTable.end())
             {
                 //< tile不在open表中
                 curTile->setFitness(g, h);
-                curTile->setParent(bestTile);
+                curTile->setBackwardParent(bestTile);
                 openTable.emplace(curTile);
             }
         }

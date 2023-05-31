@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _GRAPH_H_
+#define _GRAPH_H_
+
 #include <iostream>
 #include <vector>
 
@@ -23,7 +25,6 @@ struct Point
 };
 class  Tile
 {
-
 private:
     int row;     //< 图中的行列数
     int col;
@@ -36,7 +37,8 @@ private:
     double hValue; // current Tile到 target  Tile的距离代价
     double fitness; // 当前距离的预估代价： f = g + h 代价函数
     
-    Tile* parent; // 保存父亲节点
+    Tile* parent_f; // 保存前向父亲节点
+    Tile* parent_b; // 保存后向父亲节点
 
 public:
     bool isPathed() const{return isPath;};
@@ -75,7 +77,8 @@ public:
         gValue = 0;
         hValue = 0;
         fitness = 0;
-        parent = nullptr;
+        parent_f = nullptr;
+        parent_b = nullptr;
         isPath = false;
 
     }
@@ -88,10 +91,15 @@ public:
     void   setObstacle(bool b = true) {isBlock = b;};
     void   unsetObstacle() {isBlock = false;};
 
-    Tile*  getParent() const{return parent;};
-    void   setParent(Tile* p) { parent = p;};
-    void   unsetParent(){parent=nullptr;};
+    // Tile*  getParent() const{return parent;};
+    // void   setParent(Tile* p) { parent = p;};
+    void   unsetParent(){parent_f=nullptr;parent_b = nullptr;};
 
+    Tile* getForwardParent() const{return parent_f;};
+    Tile* getBackwardParent() const{return parent_b;};
+    void  setForwardParent(Tile* p) {parent_f = p;};
+    void  setBackwardParent(Tile* p) {parent_b = p;};
+    
     void   setGvalue(double g) {gValue = g;};
     double getGvalue()const {return gValue;};
     
@@ -164,3 +172,5 @@ private:
     vector<Tile*>         path; // 存放当前路径  
 
 };
+
+#endif

@@ -1,5 +1,5 @@
-#ifndef _ASTAR_H_
-#define _ASTAR_H_
+#ifndef _BIDBidirectAstar_H_
+#define _BIDBidirectAstar_H_
 
 #include "graph.h"
 #include <iostream>
@@ -38,21 +38,21 @@ public:
     }
 };
 
-class Astar
+class BidirectAstar
 {
 public:
-    explicit Astar(Graph* g):graph(g){};
+    explicit BidirectAstar(Graph* g):graph(g){};
     bool run(const Tile& start, const Tile& end, bool direct=false);
     double calG(const Tile& curTile, const Tile& neiborTile);
     double calH(const Tile& curTile, const Tile& targetTile);
     void showOpenTable()
     {
-        std::cout << "openTable container size = " << openTable.size() <<std::endl;
+        std::cout << "openTable container size = " << openTableFore.size() <<std::endl;
         // for(auto itr = openTable.begin(); itr != openTable.end(); itr++)
         // {
         //     std::cout << "{("<< (*itr)->getRow() << "," << (*itr)->getCol() <<")-fitness:" << (*itr)->getFitness() << "}, ";
         // }
-        auto cp = openTable;
+        auto cp = openTableFore;
         while(!cp.empty())
         {
             auto t = cp.top();
@@ -63,15 +63,17 @@ public:
     }
     void getPath();
 private:
-    Astar();
-    Astar(const Astar&);
-    Astar& operator=(const Astar&);
-    Astar& operator=(const Astar&) const;
+    BidirectAstar();
+    BidirectAstar(const BidirectAstar&);
+    BidirectAstar& operator=(const BidirectAstar&);
+    BidirectAstar& operator=(const BidirectAstar&) const;
     
 private:    
     Graph* graph;
-    pQueue<Tile*, std::vector<Tile*>, Tilecmp> openTable; // 最小的在队列前面
-    unordered_set<Tile*>  closeTable;
+    pQueue<Tile*, std::vector<Tile*>, Tilecmp> openTableFore; // 前向优先队列
+    pQueue<Tile*, std::vector<Tile*>, Tilecmp> openTableBack; // 前向优先队列
+    unordered_set<Tile*>  closeTableFore;
+    unordered_set<Tile*>  closeTableBack;
     vector<Tile*> Path;
 };
 

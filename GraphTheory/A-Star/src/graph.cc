@@ -189,14 +189,45 @@ vector<Tile*> Graph::calPath(Tile* resTile)
 {
     
     if(resTile == nullptr) return this->path;
-    auto tmpTile = resTile;
-    while(tmpTile != nullptr)
+    Tile* tmpTile = resTile;
+    std::cout << "a" << std::endl;
+    //< 前向
+    Tile* fParent = tmpTile->getForwardParent();
+    Tile* bParent = tmpTile->getBackwardParent();
+    std::vector<Tile*> ftmp;
+    
+    while(fParent != nullptr && tmpTile != nullptr)
     {
-        tmpTile->setPathed();
-        tmpTile->setObstacle();
-        this->path.push_back(tmpTile);
-        tmpTile = tmpTile->getParent();
+        ftmp.push_back(tmpTile); 
+        tmpTile = tmpTile->getForwardParent();
     }
+
+    std::cout << "b" << std::endl;
+    for(auto it= ftmp.rbegin(); it != ftmp.rend(); ++it)
+    {
+        Tile* curTile = *it;
+        this->path.push_back(curTile);
+    }
+    std::cout << "c" << std::endl;
+    //后向
+    tmpTile = resTile;
+    std::vector<Tile*> btmp;
+    while(bParent != nullptr && tmpTile != nullptr)
+    {
+        btmp.push_back(tmpTile); 
+        this->path.push_back(tmpTile);
+        tmpTile = tmpTile->getBackwardParent();
+    }
+
+    //设置path属性
+    for(auto it = this->path.begin(); it!= this->path.end(); ++it)
+    {
+        auto curTile = *it;
+        if(curTile == nullptr) continue;
+        curTile->setPathed();
+        curTile->setObstacle();
+    }
+
     //drawGraph();
     return this->path;
 }
