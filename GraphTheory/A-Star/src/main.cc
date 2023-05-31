@@ -49,13 +49,13 @@ int main()
     
 
     Tile start2(Point(1, 1));
-    Tile target2(Point(3, 1));
-    status = algo.run(start2, target2, false);
+    Tile target2(Point(9, 9));
+    status = algo.run(start2, target2, true);
 
 
     Tile start3(Point(0, 2));
-    Tile target3(Point(0, 8));
-    //status = algo.run(start3, target3, false);
+    Tile target3(Point(9, 3));
+    status = algo.run(start3, target3, false);
     
     std::cout << "\n----result----" <<std::endl;
     graph.drawGraph();

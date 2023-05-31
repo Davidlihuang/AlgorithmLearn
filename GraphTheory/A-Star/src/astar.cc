@@ -55,8 +55,9 @@ bool Astar::run(const Tile& start, const Tile& target, bool direct)
     }
     
     // 主要算法
-    startTile->setFitness(0, (abs(target.getCoord().x) + abs(target.getCoord().y)));
-    
+    //startTile->setFitness(0, (abs(target.getCoord().x) + abs(target.getCoord().y)));
+    startTile->setFitness(0, 0);
+
     openTable.emplace(startTile);
     Tile* res = nullptr;
     while(!openTable.empty())
@@ -73,7 +74,7 @@ bool Astar::run(const Tile& start, const Tile& target, bool direct)
         // std::cout << "open表的大小：" << openTable.size() << std::endl;
         // showOpenTable();
         vector<Tile*> neibour = graph->neighBours(bestTile, direct);
-        for(int i = 0; i < neibour.size(); i++)
+        for(size_t i = 0; i < neibour.size(); i++)
         {
             //< 
             Tile* curTile = neibour[i];
@@ -85,21 +86,20 @@ bool Astar::run(const Tile& start, const Tile& target, bool direct)
             }
 
             // tile在open表中  
+            double g = bestTile->getGvalue() + calG(*bestTile, *curTile);
+            double h = calH(*curTile, *targetTile);
             if(openTable.find(curTile) != openTable.end())
-            {
-                double g = calG(*startTile, *curTile);
-                double h = calH(*curTile, *targetTile);      
+            {   
                 if(g < curTile->getFitness())
                 {
-                    curTile->setFitness(g,h);
+                    // 优先队列中保存的是指针，指针所指向对象的值改变时是否触发排序？ 测试会的
+                    curTile->setFitness(g, h);
                     curTile->setParent(bestTile);
                 }
             }
             else //if(openTable.find(curTile) == openTable.end())
             {
                 //< tile不在open表中
-                double g = calG(*startTile, *curTile);
-                double h = calH(*curTile, *targetTile);
                 curTile->setFitness(g, h);
                 curTile->setParent(bestTile);
                 openTable.emplace(curTile);
